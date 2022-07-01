@@ -1,0 +1,29 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: quarkus-jvm
+    app.kubernetes.io/component: quarkus-jvm
+    app.kubernetes.io/instance: quarkus-jvm
+  name: quarkus-jvm
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: quarkus-jvm:{{ .Values.microservices.config.kubebrick.injectionmachine.tag }}
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    binary: {}
+    type: Binary
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: {{ .Values.microservices.config.kubebrick.injectionmachine.baseimage }}
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5

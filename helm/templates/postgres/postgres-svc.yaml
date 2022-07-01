@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    template: postgresql-ephemeral-template    
+  name: {{ .Values.peopledb.servicename }}
+spec:
+  ports:
+  - name: postgresql
+    port: {{ .Values.peopledb.port }}
+    protocol: TCP
+    targetPort: {{ .Values.peopledb.port }}
+  selector:
+    name: {{ .Values.peopledb.servicename }}
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

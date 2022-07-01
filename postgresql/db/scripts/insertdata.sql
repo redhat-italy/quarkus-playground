@@ -1,0 +1,1 @@
+COPY people FROM '/data/datasource.csv' DELIMITER ',' CSV HEADER;

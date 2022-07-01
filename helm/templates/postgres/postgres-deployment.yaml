@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.peopledb.servicename }}
+  labels:
+    app.kubernetes.io/name: postgresql
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.peopledb.servicename }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: {{ .Values.peopledb.servicename }}
+        app: {{ .Values.peopledb.servicename }}         
+    spec:  
+      containers:              
+        - name: postgres
+          image: {{ .Values.peopledb.image }}
+          command: ["run-postgresql", "-c", "wal_level=logical"]
+          resources:
+            limits:
+              memory: {{ .Values.peopledb.memory }} 
+            requests:
+              memory: {{ .Values.peopledb.memory }}       
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: {{ .Values.peopledb.port }}
+          env:
+            - name: POSTGRESQL_USER
+              value: {{ .Values.peopledb.user }}
+            - name: POSTGRESQL_PASSWORD
+              value: {{ .Values.peopledb.password }}
+            - name: POSTGRESQL_DATABASE
+              value: {{ .Values.peopledb.database }}   
+            - name: POSTGRESQL_ADMIN_PASSWORD
+              value: {{ .Values.peopledb.password }}
+            - name: PGPASSWORD
+              value: {{ .Values.peopledb.password }}      

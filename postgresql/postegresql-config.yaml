@@ -1,0 +1,10 @@
+tenant: "public"
+namespace: "default"
+name: "jdbc-postgres-sink"
+topicName: "persistent://public/default/sensor_readings_enriched"
+sinkType: "jdbc-postgres"    
+configs:
+    userName: "postgres"
+    password: "password"
+    jdbcUrl: "jdbc:postgresql://localhost:5432/readings"
+    tableName: "readings_log"

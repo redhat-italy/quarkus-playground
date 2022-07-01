@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: quarkus-jvm
+    app.kubernetes.io/component: quarkus-jvm
+    app.kubernetes.io/instance: quarkus-jvm
+  name: quarkus-jvm
+spec:
+  ports:
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: 8443-tcp
+    port: 8443
+    protocol: TCP
+    targetPort: 8443
+  - name: 8778-tcp
+    port: 8778
+    protocol: TCP
+    targetPort: 8778
+  selector:
+    app: quarkus-jvm
+  sessionAffinity: None
+  type: ClusterIP

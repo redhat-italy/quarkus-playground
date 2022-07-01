@@ -1,0 +1,15 @@
+apiVersion: v1
+data:
+  data.sql: |
+    CREATE TABLE IF NOT EXISTS people
+    (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    surname VARCHAR(255) NOT NULL,
+    date_of_birth DATE NOT NULL DEFAULT CURRENT_DATE
+    );
+    COPY people FROM '/opt/init/data/datasource.csv' DELIMITER ',' CSV HEADER;
+    ALTER TABLE "people" OWNER TO "{{ .Values.peopledb.user }}";
+kind: ConfigMap
+metadata:
+  name: {{ .Values.peopledb.servicename }}-init-script
