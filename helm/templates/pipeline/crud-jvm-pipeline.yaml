@@ -11,7 +11,7 @@ items:
       description: The target namespace
       name: target-namespace
       type: string
-    - default: quarkus-playground
+    - default: quarkus-jvm
       description: The application name
       name: application-name
       type: string         
@@ -48,9 +48,9 @@ items:
       - name: namespace
         value: $(params.target-namespace)
       - name: buildconfig-name
-        value: quarkus-playground
+        value: quarkus-jvm
       - name: dir-file-path
-        value: /workspace/source/quarkusjvm/quarkus-playground/target/quarkus-app
+        value: /workspace/source/quarkusjvm/target/quarkus-app
       runAfter:
       - build-app
       taskRef:
