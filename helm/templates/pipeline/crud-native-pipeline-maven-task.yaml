@@ -13,7 +13,7 @@ spec:
     description: The workspace where the source code will found
   steps:  
   - name: build
-    image: mandrel-21-rhel8:21.3
+    image: quarkus/umandrel-21-rhel8:21.3
     command: ["/bin/bash", "-c"]      
     args:
     - /workspace/source/$(params.workspace-subdir)/mvnw -f /workspace/source/$(params.workspace-subdir)/pom.xml -s /workspace/source/$(params.workspace-subdir)/custom-settings.xml clean package -Dnative -DskipTests=true -Dmaven.repo.local=/workspace/source/m2
