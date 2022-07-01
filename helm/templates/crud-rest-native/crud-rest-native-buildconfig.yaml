@@ -2,17 +2,17 @@ apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
   labels:
-    app: quarkus-jvm
-    app.kubernetes.io/component: quarkus-jvm
-    app.kubernetes.io/instance: quarkus-jvm
-  name: quarkus-jvm
+    app: quarkus-native
+    app.kubernetes.io/component: quarkus-native
+    app.kubernetes.io/instance: quarkus-native
+  name: quarkus-native
 spec:
   failedBuildsHistoryLimit: 5
   nodeSelector: null
   output:
     to:
       kind: ImageStreamTag
-      name: quarkus-jvm:{{ .Values.microservices.config.quarkus.jvm.tag }}
+      name: quarkus-native:{{ .Values.microservices.config.quarkus.native.tag }}
   postCommit: {}
   resources: {}
   runPolicy: Serial
@@ -23,7 +23,7 @@ spec:
     sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: {{ .Values.microservices.config.quarkus.jvm.baseimage }}
+        name: {{ .Values.microservices.config.quarkus.native.baseimage }}
         namespace: openshift
     type: Source
   successfulBuildsHistoryLimit: 5

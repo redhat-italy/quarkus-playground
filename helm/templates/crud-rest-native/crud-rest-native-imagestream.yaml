@@ -1,0 +1,11 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  labels:
+    app: quarkus-native
+    app.kubernetes.io/component: quarkus-native
+    app.kubernetes.io/instance: quarkus-native  
+  name: quarkus-native
+spec:
+  lookupPolicy:
+    local: false

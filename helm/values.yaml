@@ -1,4 +1,4 @@
-# Default values for kubebrick-factory.
+# Default values for quarkus-factory.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -12,14 +12,13 @@ image:
 
 microservices:
   config:
-    kubebrick:
-      externalbroker: true
-      brokername: "amq-broker"
-      externalbrokerurl: "amqps://amq-broker-all-0-svc-rte-kubebrick-amq.apps.ccnr-appdev.sandbox1331.opentlc.com:443?sslEnabled=true"
-      injectionmachine:
+    quarkus:
+      jvm:
         baseimage: "openjdk-11-rhel8:1.0"
-        tag: "1.0"    
-      ocphostdomain: .cluster.openshift.mydomain.xyz                         
+        tag: "1.0"        
+      native:
+        baseimage: "ubi-minimal:8.5"
+        tag: "1.0"
 
 peopledb:
   user: dbuser

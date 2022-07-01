@@ -3,7 +3,7 @@ items:
 - apiVersion: tekton.dev/v1beta1
   kind: Pipeline
   metadata:
-    name: quarkus-jvm-pipeline
+    name: quarkus-native-pipeline
   spec:
     description: A java springboot ReST service pipeline
     params:
@@ -11,7 +11,7 @@ items:
       description: The target namespace
       name: target-namespace
       type: string
-    - default: quarkus-jvm
+    - default: quarkus-native
       description: The application name
       name: application-name
       type: string         
@@ -23,7 +23,7 @@ items:
       - name: deleteExisting
         value: "true"
       - name: subdirectory
-        value: "quarkusjvm"
+        value: "quarkusnative"
       taskRef:
         kind: ClusterTask
         name: git-clone
@@ -35,11 +35,11 @@ items:
         - name: sub-project-name
           value: quarkus-playground-service
         - name: workspace-subdir
-          value: quarkusjvm
+          value: quarkusnative
       runAfter:
       - fetch-repository
       taskRef:
-        name: maven-quarkus-build
+        name: maven-mandrel-quarkus-build
       workspaces:
       - name: source
         workspace: workspace-acme        
@@ -48,13 +48,13 @@ items:
       - name: namespace
         value: $(params.target-namespace)
       - name: buildconfig-name
-        value: quarkus-jvm
+        value: quarkus-native
       - name: dir-file-path
-        value: /workspace/source/quarkusjvm/target/quarkus-app
+        value: /workspace/source/target/crud-sample-1.0-runner
       runAfter:
       - build-app
       taskRef:
-        name: java-binary-deploy
+        name: native-binary-deploy
       workspaces:
       - name: source
         workspace: workspace-acme

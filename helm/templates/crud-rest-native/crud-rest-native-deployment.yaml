@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: quarkus-jvm
+  name: quarkus-native
   labels:
-    app: quarkus-jvm
+    app: quarkus-native
     version: v1
     {{- include "quarkus-factory.labels" . | nindent 4 }}    
     app.kubernetes.io/name: camel
@@ -21,7 +21,7 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
-        app: quarkus-jvm
+        app: quarkus-native
         version: v1
         {{- include "quarkus-factory.selectorLabels" . | nindent 8 }}
     spec:
@@ -32,10 +32,12 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: quarkus-jvm
+        - name: quarkus-native
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}/{{ .Release.Namespace }}/quarkus-jvm:{{ .Values.microservices.config.quarkus.jvm.tag }}"
+          image: "{{ .Values.image.repository }}/{{ .Release.Namespace }}/quarkus-native:{{ .Values.microservices.config.quarkus.native.tag }}"
+#          command:
+#            - '<command>'
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: QUARKUS_HTTP_PORT 

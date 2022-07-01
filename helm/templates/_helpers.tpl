@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "kubebrick-factory.name" -}}
+{{- define "quarkus-factory.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "kubebrick-factory.fullname" -}}
+{{- define "quarkus-factory.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "kubebrick-factory.chart" -}}
+{{- define "quarkus-factory.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "kubebrick-factory.labels" -}}
-helm.sh/chart: {{ include "kubebrick-factory.chart" . }}
-{{ include "kubebrick-factory.selectorLabels" . }}
+{{- define "quarkus-factory.labels" -}}
+helm.sh/chart: {{ include "quarkus-factory.chart" . }}
+{{ include "quarkus-factory.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "kubebrick-factory.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "kubebrick-factory.name" . }}
+{{- define "quarkus-factory.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "quarkus-factory.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "kubebrick-factory.serviceAccountName" -}}
+{{- define "quarkus-factory.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "kubebrick-factory.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "quarkus-factory.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
