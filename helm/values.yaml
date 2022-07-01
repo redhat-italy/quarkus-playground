@@ -31,7 +31,7 @@ peopledb:
   image: image-registry.openshift-image-registry.svc:5000/openshift/postgresql:12-el8
 
 pipelines:
-  giturl: https://github.com/redhat-italy/kubebrick-showcase
+  giturl: https://github.com/redhat-italy/quarkus-playground
   pvcs:
     - java
 
