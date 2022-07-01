@@ -23,7 +23,7 @@ items:
       - name: deleteExisting
         value: "true"
       - name: subdirectory
-        value: "injectionmachine"
+        value: "quarkusjvm"
       taskRef:
         kind: ClusterTask
         name: git-clone
@@ -35,7 +35,7 @@ items:
         - name: sub-project-name
           value: quarkus-playground-service
         - name: workspace-subdir
-          value: injectionmachine
+          value: quarkusjvm
       runAfter:
       - fetch-repository
       taskRef:
@@ -50,7 +50,7 @@ items:
       - name: buildconfig-name
         value: quarkus-playground
       - name: dir-file-path
-        value: /workspace/source/injectionmachine/dev/microservices/quarkus-playground-service/target/quarkus-app
+        value: /workspace/source/quarkusjvm/quarkus-playground/target/quarkus-app
       runAfter:
       - build-app
       taskRef:
