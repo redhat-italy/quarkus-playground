@@ -66,6 +66,10 @@ Easily start your RESTful Web Services
 
 curl --header "Content-Type: application/json" -X POST  localhost:8080/people/create -d @sample.json
 
-# quarkus-playground
+# Helm setup
 
-helm upgrade -i quarkus-playground  helm --dry-run
+helm upgrade -i quarkus-playground  helm 
+
+# Native deploy
+
+mvn clean package -Dnative -Dquarkus.container-image.build=true -Dquarkus.native.container-runtime=docker -Dquarkus.kubernetes.deploy=true -Dquarkus.kubernetes-client.trust-certs=true

@@ -17,8 +17,10 @@ microservices:
         baseimage: "openjdk-11-rhel8:1.0"
         tag: "1.0"        
       native:
-        baseimage: "ubi-minimal:8.5"
+        baseimage: "ubi-minimal:8.6-854"
+        s2iimage: "ubi-quarkus-native-binary-s2i:1.0"
         tag: "1.0"
+        image: "quay.io/slinguer/quarkus-native:1.0"
 
 peopledb:
   user: dbuser

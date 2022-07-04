@@ -33,9 +33,15 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: quarkus-native
+          resources:
+            limits:
+              memory: 200Mi
+            requests:
+              memory: 100Mi
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}/{{ .Release.Namespace }}/quarkus-native:{{ .Values.microservices.config.quarkus.native.tag }}"
+#          image: "{{ .Values.image.repository }}/{{ .Release.Namespace }}/quarkus-native:{{ .Values.microservices.config.quarkus.native.tag }}"
+          image: "{{ .Values.microservices.config.quarkus.native.image }}" 
 #          command:
 #            - '<command>'
           imagePullPolicy: {{ .Values.image.pullPolicy }}
