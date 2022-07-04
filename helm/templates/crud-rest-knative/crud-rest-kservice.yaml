@@ -1,0 +1,57 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: "{{ .Values.microservices.config.quarkus.knative.name }}"
+    app.kubernetes.io/version: "1.0"  
+  name: "{{ .Values.microservices.config.quarkus.knative.name }}"
+spec:
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: "{{ .Values.microservices.config.quarkus.knative.name }}"
+        app.kubernetes.io/version: "1.0"
+    spec:
+      containerConcurrency: 0
+      containers:     
+        - env:
+            - name: QUARKUS_HTTP_PORT 
+              value: '8080'  
+            - name: JAVA_APP_JAR
+              value: 'quarkus-run.jar'  
+            - name: QUARKUS_DATASOURCE_JDBC_URL              
+              value: jdbc:postgresql://peopledb:5432/people
+            - name: QUARKUS_DATASOURCE_USERNAME              
+              value: dbuser
+            - name: QUARKUS_DATASOURCE_PASSWORD              
+              value: password          
+          image: "{{ .Values.image.repository }}/{{ .Release.Namespace }}/quarkus-native:{{ .Values.microservices.config.quarkus.native.tag }}" 
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /q/health/live
+              port: 0
+              scheme: HTTP
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+          name: "{{ .Values.microservices.config.quarkus.knative.name }}"
+          ports:
+          - containerPort: 8080
+            name: http1
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /q/health/ready
+              port: 0
+              scheme: HTTP
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+          resources: {}
+      enableServiceLinks: false
+      timeoutSeconds: 300
+  traffic:
+  - latestRevision: true
+    percent: 100
