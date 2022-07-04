@@ -6,7 +6,7 @@ metadata:
     app: quarkus-jvm
     version: v1
     {{- include "quarkus-factory.labels" . | nindent 4 }}    
-    app.kubernetes.io/name: camel
+    app.kubernetes.io/name: quarkus
 spec:
 {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}

@@ -6,7 +6,7 @@ metadata:
     app: quarkus-native
     version: v1
     {{- include "quarkus-factory.labels" . | nindent 4 }}    
-    app.kubernetes.io/name: camel
+    app.kubernetes.io/name: quarkus
 spec:
 {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -40,8 +40,8 @@ spec:
               memory: 100Mi
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-#          image: "{{ .Values.image.repository }}/{{ .Release.Namespace }}/quarkus-native:{{ .Values.microservices.config.quarkus.native.tag }}"
-          image: "{{ .Values.microservices.config.quarkus.native.image }}" 
+          image: "{{ .Values.image.repository }}/{{ .Release.Namespace }}/quarkus-native:{{ .Values.microservices.config.quarkus.knative.tag }}"
+#          image: "{{ .Values.microservices.config.quarkus.native.image }}" 
 #          command:
 #            - '<command>'
           imagePullPolicy: {{ .Values.image.pullPolicy }}

@@ -24,6 +24,5 @@ spec:
       from:
         kind: ImageStreamTag
         name: {{ .Values.microservices.config.quarkus.native.s2iimage }}
-        namespace: openshift
     type: Source
   successfulBuildsHistoryLimit: 5
