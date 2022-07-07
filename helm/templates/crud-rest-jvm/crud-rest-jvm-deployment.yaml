@@ -33,6 +33,11 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: quarkus-jvm
+          resources:
+            limits:
+              memory: 600Mi
+            requests:
+              memory: 200Mi        
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}/{{ .Release.Namespace }}/quarkus-jvm:{{ .Values.microservices.config.quarkus.jvm.tag }}"

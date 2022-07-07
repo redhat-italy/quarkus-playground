@@ -73,3 +73,9 @@ helm upgrade -i quarkus-playground  helm
 # Native deploy
 
 mvn clean package -Dnative -Dquarkus.container-image.build=true -Dquarkus.native.container-runtime=docker -Dquarkus.kubernetes.deploy=true -Dquarkus.kubernetes-client.trust-certs=true
+
+# Setup OCP
+
+You may need to import image:
+
+```oc import-image ubi-quarkus-native-binary-s2i:1.0  --from=quay.io/quarkus/ubi-quarkus-native-binary-s2i:1.0 --confirm```

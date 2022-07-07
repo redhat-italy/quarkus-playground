@@ -18,6 +18,8 @@ spec:
     workingDir: /workspace/source/$(params.workspace-subdir)   
     args:
     - /workspace/source/$(params.workspace-subdir)/mvnw -f /workspace/source/$(params.workspace-subdir)/pom.xml -s /workspace/source/$(params.workspace-subdir)/custom-settings.xml clean package -Dnative -DskipTests=true -Dmaven.repo.local=/workspace/source/m2
+    securityContext:
+      runAsUser: 0    
 
 
 
